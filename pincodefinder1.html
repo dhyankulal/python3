@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="result"></p>
+    <input id="id1" type="text" placeholder="Enter place name">
+    <button onclick="ding()">search</button>
+</body>
+<script>
+    async function ding() {
+        let place = document.getElementById("id1").value;
+        let url1 = `https://api.postalpincode.in/postoffice/${place}`;
+        let data1 = await fetch(url1);
+        let data2 = await data1.json();
+        let name1 = data2[0].PostOffice;
+        let result = document.getElementById("result");
+        result.innerText = "";
+
+        for (let i = 0; i < name1.length; i++) {
+            result.innerText += name1[i].Pincode + "\n";
+        }
+    }
+</script>
+
+</html>
